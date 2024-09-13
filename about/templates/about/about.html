@@ -32,23 +32,19 @@
             <!-- add your form here. Your submit button should 
                                 have the classes of btn, btn-secondary -->
             <!-- Creating New Project Requests -->
-            <div class="col-12 col-md-6 my-5">
-                <div class="card-body">
-                {% if user.is_authenticated %}
-                <h3>Leave a Project Request:</h3>
-                <p>Requesting as: {{ user.username }}</p>
-                <form id="collaborateForm" method="post"
-                    style="margin-top: 1.3em;">
-                    {{ collaboration_form | crispy }}
-                    {% csrf_token %}
-                    <button id="submitButton" type="submit"
-                    class="btn btn-secondary">Submit</button>
-                </form>
-                {% else %}
-                <p>Log in to leave a comment</p>
-                {% endif %}
-                </div>
-            </div>
+            {% if user.is_authenticated %}
+            <h3>Leave a Project Request:</h3>
+            <p>Requesting as: {{ user.username }}</p>
+            <form id="collaborateForm" method="post"
+                style="margin-top: 1.3em;">
+                {{ collaboration_form | crispy }}
+                {% csrf_token %}
+                <button id="submitButton" type="submit"
+                class="btn btn-secondary">Submit</button>
+            </form>
+            {% else %}
+            <p>Log in to request  a collaboration</p>
+            {% endif %}
         </div>
     </div>
 </div>
