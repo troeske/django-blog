@@ -6,25 +6,15 @@
 <div class="container mt-5">
     <div class="row">
         <div class="col-12 col-md-4 text-center">
-            <img src="{% static 'images/nobody.jpg' %}" width="75%">
-            {% if "placeholder" in post.featured_image.url %}
-            <img src="{% static 'images/nobody.jpg' %}" width="75%"
-                alt="placeholder image">
+            {% if "placeholder" in about.profile_image.url %}
+            <img src="{% static 'images/nobody.jpg' %}" width="75%" alt="{{ about.title }}">
             {% else %}
-            <img src=" {{ post.profile_image.url }}" width="75%"
-                alt="my picture">
+            <img src="{{ about.profile_image.url }}" width="75%" alt="{{ about.title }}">
             {% endif %}
         </div>
         <div class="col-12 col-md-8">
             <h2>{{ about.title }}</h2>
             {{ about.content | safe }}
-        </div>
-    </div>
-    <div class="row">
-        <div class="col text-right">
-          <!-- Updated on field goes in here -->
-    
-          <p class="text-end"><em>Updated on: {{ about.updated_on }}</em></p>
         </div>
     </div>
     <div class="row justify-content-center">
@@ -36,22 +26,11 @@
                 I'm excited to hear from you. Fill out the form
                 and we can get the ball rolling!</p>
 
-            <!-- add your form here. Your submit button should 
-                                have the classes of btn, btn-secondary -->
-            <!-- Creating New Project Requests -->
-            {% if user.is_authenticated %}
-            <h3>Leave a Project Request:</h3>
-            <p>Requesting as: {{ user.username }}</p>
-            <form id="collaborateForm" method="post"
-                style="margin-top: 1.3em;">
-                {{ collaboration_form | crispy }}
+            <form method="post">
+                {{ collaborate_form | crispy }}
                 {% csrf_token %}
-                <button id="submitButton" type="submit"
-                class="btn btn-secondary">Submit</button>
+                <button class="btn btn-secondary" type="submit">Submit</button>
             </form>
-            {% else %}
-            <p>Log in to request  a collaboration</p>
-            {% endif %}
         </div>
     </div>
 </div>
